@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class LibraryEventsController {
 
-        @PostMapping("/v1/libraryevent")
+    @PostMapping("/v1/libraryevent")
     public ResponseEntity<LibraryEvent> postLibraryEvent(
             @RequestBody LibraryEvent libraryEvent
     ) {
