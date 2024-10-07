@@ -68,7 +68,7 @@ public class LibraryEventsProducer {
         return sendResult;
     }
 
-    public CompletableFuture<SendResult<Integer, String>> sendLibraryEventApproach3(LibraryEvent libraryEvent) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
+    public CompletableFuture<SendResult<Integer, String>> sendLibraryEventApproach3(LibraryEvent libraryEvent) throws JsonProcessingException {
         var key = libraryEvent.libraryEventId();
         var value = objectMapper.writeValueAsString(libraryEvent);
 
@@ -76,7 +76,7 @@ public class LibraryEventsProducer {
 
         //1. Blocking call - get metadata about the kafka cluster
         //2. Send message happens - Returns a CompletableFuture
-        var completableFuture = kafkaTemplate.send(topic, key, value);
+        var completableFuture = kafkaTemplate.send(producerRecord);
 
         return completableFuture
                 .whenComplete((sendResult, throwable) -> {
